@@ -1,0 +1,15 @@
+{
+    "name": "requiem/66print-loki-log",
+    "autoload": {
+        "psr-4": {
+            "Requiem\\66printLokiLog\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "lsz",
+            "email": "513266358@qq.com"
+        }
+    ],
+    "require": {}
+}

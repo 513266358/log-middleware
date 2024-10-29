@@ -12,6 +12,7 @@
 namespace Requiem\LogMiddleware\LogFormatter;
 
 use Monolog\Utils;
+use Monolog\Formatter\NormalizerFormatter;
 
 /**
  * Formats incoming records into a one-line string

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Loki\Logging\Response\Config;
+namespace Requiem\LogMiddleware\Response\Config;
 
 /**
  * 业务code

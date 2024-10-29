@@ -1,6 +1,6 @@
 <?php
 
-namespace Loki\Logging\Jobs;
+namespace Requiem\LogMiddleware\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;

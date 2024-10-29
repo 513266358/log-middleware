@@ -1,10 +1,10 @@
 <?php
 
-namespace Loki\Logging\Middleware;
+namespace Requiem\LogMiddleware\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Loki\Logging\Jobs\RequestApiLog;
+use Requiem\LogMiddleware\Jobs\RequestApiLog;
 class RecordRequest
 {
     private  $deal_fun_name = ['/api/v1/uploadFilesList/uploadCoverImg','/api/v1/uploadFilesList/uploadFilesImg','/api/v1/uploadFilesList/uploadFiles'];

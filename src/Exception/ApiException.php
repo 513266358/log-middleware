@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Loki\Logging\Exception;
+namespace Requiem\LogMiddleware\Exception;
 use Exception;
 use Throwable;
 class ApiException extends Exception

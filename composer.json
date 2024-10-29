@@ -1,8 +1,8 @@
 {
-    "name": "requiem/66print-loki-log",
+    "name": "requiem/log-middleware",
     "autoload": {
         "psr-4": {
-            "Requiem\\66printLokiLog\\": "src/"
+            "Requiem\\LogMiddleware\\": "src/"
         }
     },
     "authors": [

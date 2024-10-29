@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Loki\Logging\Response;
+namespace Requiem\LogMiddleware\Response;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Request;

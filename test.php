@@ -1,3 +1,5 @@
 <?php
-use Requiem\LogMiddleware\Exception\ApiException;
-new ApiException(1,2);
+use Requiem\LogMiddleware\LogClass;
+$logClass   = new LogClass("system_log");
+$logClass->output("123","info");
+$logClass->info("debug");

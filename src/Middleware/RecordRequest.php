@@ -32,18 +32,15 @@ class RecordRequest
         $requestLog =[
             $func, $request_id, json_encode(\Request::header()), json_encode($requestParams),
         ];
-        $api_key = 'project_request_log';
-        if($isUpload == 0 &&  env('PROJECT_REQUEST_LOG'))dispatch(new RequestApiLog($api_key, $requestLog));
+        $api_key = env('PROJECT_REQUEST_LOG');
+        if(!empty($api_key))
+        {
+            $logClass   = new LogClass($api_key);
+            $logClass->output($requestLog,"debug");
+        }
+
         $response =  $next($request);
 
-        $returnLog = [
-            'func'          =>  \Request::getRequestUri(),
-            'request_id'    => $request_id,
-            'response'      => method_exists($response,'getData')?json_encode($response->getData(true)):[],
-
-        ];
-        $retun_api_key = 'api_returnLog';
-        if($isUpload == 0 && env('API_LOG'))dispatch(new RequestApiLog($retun_api_key, $returnLog));
 
 
         return  $response;

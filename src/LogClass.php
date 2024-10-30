@@ -5,31 +5,27 @@ use Illuminate\Support\Facades\Log;
 
 class LogClass
 {
-    public function output($message,$level="",$file="",$error=[])
+    public $channel;
+    public function __construct($channel)
+    {
+        $this->channel = $channel;
+    }
+    public function output($message,$level,$file="",$error=[])
     {
         $message    = env("APP_NAME")." ".$message;
-        switch($level)
+        if($level == "fatal")
         {
-            case "fatal":
-                Log::channel("system_log")->emergency($message);
-                if(env("SEND_DINGTALK"))
-                {
-                    self::sendError($file,$error);
-                }
-                break;
-            case "error":
-                Log::channel("system_log")->error($message);
-                break;
-            case "warn":
-                Log::channel("system_log")->warning($message);
-                break;
-            case "info":
-                Log::channel("system_log")->info($message);
-                break;
-            default :
-                Log::channel("system_log")->debug($message);
-                break;
+            if(env("SEND_DINGTALK"))
+            {
+                self::sendError($file,$error);
+            }
         }
+        dispatch(new RequestApiLog($this->channel, $message,$level));
+    }
+
+    public function info($message)
+    {
+        Log::channel($this->channel)->info($message);
     }
 
     protected function sendError($file, $error)

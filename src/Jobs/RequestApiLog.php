@@ -21,10 +21,11 @@ class RequestApiLog implements ShouldQueue
      *
      * @return void
      */
-    public function __construct( string $type,array $data)
+    public function __construct( string $channel, $data,string $level)
     {
-        $this->type = $type;
-        $this->data = $data;
+        $this->channel  = $channel;
+        $this->data     = $data;
+        $this->level    = $level;
     }
 
     /**
@@ -35,14 +36,24 @@ class RequestApiLog implements ShouldQueue
     public function handle()
     {
 
-        // if($this->type == 'errorLog' && env("ISSENT")) {
-            // _errorLog('上传组件_error', ['line' => $this->data['error']['line'], 'file' => $this->data['error']['file'], 'error' => $this->data['error']['error']], $this->data['data'], 1);
-        // };
-
-        if($this->type == 'project_request_log' && env("PROJECT_REQUEST_LOG"))  \Log::channel('project_request_log')->Info($this->data);
-        if($this->type == 'system_log' && env("SYSTEM_LOG"))  \Log::channel('system_log')->Info($this->data);
-        if($this->type == 'vendor_request_log' && env("VENDOR_REQUEST_LOG"))  \Log::channel('vendor_request_log')->Info($this->data);
-        if($this->type == 'vendor_response_log' && env("VENDOR_RESPONSE_LOG"))  \Log::channel('vendor_response_log')->Info($this->data);
+        switch($level)
+        {
+            case "fatal":
+                Log::channel($channel)->emergency($message);
+                break;
+            case "error":
+                Log::channel($channel)->error($message);
+                break;
+            case "warn":
+                Log::channel($channel)->warn($message);
+                break;
+            case "info":
+                Log::channel($channel)->info($message);
+                break;
+            default :
+                Log::channel($channel)->debug($message);
+                break;
+        }
 
     }
 }

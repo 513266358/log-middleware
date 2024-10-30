@@ -8,7 +8,7 @@ use Requiem\LogMiddleware\Jobs\RequestApiLog;
 use Requiem\LogMiddleware\LogClass;
 class RecordRequest
 {
-    private  $deal_fun_name = ['/api/v1/uploadFilesList/uploadCoverImg','/api/v1/uploadFilesList/uploadFilesImg','/api/v1/uploadFilesList/uploadFiles'];
+    private  $deal_fun_name = env("LOG_DEAL_FUN_NAME",[]);
     /**
      * 前端记录请求参数和返回的参数，写入storge中，文件以以天为单位  保存时间31天
      *

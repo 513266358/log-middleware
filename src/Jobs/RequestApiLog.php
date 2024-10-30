@@ -8,12 +8,14 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class RequestApiLog implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    public $channel = '';
     public $data = [];
-    public $type = '';
+    public $level = '';
 
 
     /**
@@ -36,22 +38,22 @@ class RequestApiLog implements ShouldQueue
     public function handle()
     {
 
-        switch($level)
+        switch($this->level)
         {
             case "fatal":
-                Log::channel($channel)->emergency($message);
+                Log::channel($this->channel)->emergency($this->data);
                 break;
             case "error":
-                Log::channel($channel)->error($message);
+                Log::channel($this->channel)->error($this->data);
                 break;
             case "warn":
-                Log::channel($channel)->warn($message);
+                Log::channel($this->channel)->warn($this->data);
                 break;
             case "info":
-                Log::channel($channel)->info($message);
+                Log::channel($this->channel)->info($this->data);
                 break;
             default :
-                Log::channel($channel)->debug($message);
+                Log::channel($this->channel)->debug($this->data);
                 break;
         }
 

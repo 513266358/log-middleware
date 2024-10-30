@@ -1,6 +1,7 @@
 <?php
 namespace Requiem\LogMiddleware;
 use Illuminate\Support\Facades\Log;
+use Requiem\LogMiddleware\Jobs\RequestApiLog;
 
 
 class LogClass
@@ -12,7 +13,7 @@ class LogClass
     }
     public function output($message,$level,$file="",$error=[])
     {
-        $message    = env("APP_NAME")." ".$message;
+        // $message    = env("APP_NAME")." ".$message;
         if($level == "fatal")
         {
             if(env("SEND_DINGTALK"))

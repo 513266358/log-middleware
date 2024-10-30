@@ -13,7 +13,10 @@ class LogClass
     }
     public function output($message,$level,$file="",$error=[])
     {
-        // $message    = env("APP_NAME")." ".$message;
+        if(is_string($message))
+            $message    = env("APP_NAME")." ".$message;
+        else
+            $message["project"] = env("APP_NAME");
         if($level == "fatal")
         {
             if(env("SEND_DINGTALK"))
@@ -26,6 +29,10 @@ class LogClass
 
     public function info($message)
     {
+        if(is_string($message))
+            $message    = env("APP_NAME")." ".$message;
+        else
+            $message["project"] = env("APP_NAME");
         Log::channel($this->channel)->info($message);
     }
 

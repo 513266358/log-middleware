@@ -19,7 +19,7 @@ class LogClass
             $message["project"] = env("APP_NAME");
         if($level == "fatal")
         {
-            if(env("SEND_DINGTALK"))
+            if(env("DINGTALK_URL"))
             {
                 self::sendError($file,$error);
             }
@@ -38,7 +38,7 @@ class LogClass
 
     protected function sendError($file, $error)
     {
-        $webhook = 'https://oapi.dingtalk.com/robot/send?access_token=37af46e55ea1504400628996c174a1c6c9cc656e85423f94365736b47279164c';
+        $webhook = env("DINGTALK_URL");
         $path = isset($error['path']) ? $error['path'] : '';
         $data_json = isset($error['data_json']) ? $error['data_json'] : '';
         $data = [
